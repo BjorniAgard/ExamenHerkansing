@@ -14,8 +14,8 @@ class CartsController extends Controller
      */
     public function index()
     {
-        $carts = Cart::all();
-        return view('cart.index', compact('carts'));
+        $carts = Cart::all(); // ik zoek naar alle carts in de database
+        return view('cart.index', compact('carts')); // compact carts om het op de view te geburiken
     }
 
     /**

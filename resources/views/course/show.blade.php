@@ -12,6 +12,8 @@
                 <th scope="col">Beschrijving</th>
                 <th scope="col">Gebruiker</th>
                 <th scope="col">Prijs</th>
+                <th scope="col">@sortablelink('end_date', 'Startdatum')</th>
+                <th scope="col">Eind datum</th>
                 <th scope="col">Actie</th>
             </tr>
         </thead>
@@ -24,8 +26,11 @@
                 <td>{{ $course->title }}</td>
                 <td>{{ $course->description}}</td>
                 <td>{{ $user->name}}</td>
-                <td>{{ $userCourse->price}}</td>
+                <td>{{ $course->price}}</td>
+                <td>{{ $userCourse->start_date}}</td>
+                <td>{{ $userCourse->end_date}}</td>
                 <td>
+                <a href="{{ route('editUserCourse.edit', $userCourse->id) }}" class="mb-2  btn btn-warning">Wijzigen</a><br>
                     <form action="{{ route('destroyUserCourse.destroy', $userCourse->id) }}" method="POST">
                         @csrf
                         @method('DELETE')

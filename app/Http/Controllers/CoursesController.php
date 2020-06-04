@@ -16,8 +16,8 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
-        return view('course.index', compact('courses'));
+        $courses = Course::all(); // alle cursussen uit de database halen
+        return view('course.index', compact('courses')); // compact om variable in view te gebruiken
     }
 
     /**
@@ -41,13 +41,15 @@ class CoursesController extends Controller
 
     public function storeUserCourse(Request $request)
     {
-        $userCourse = new User_Course();
+        $userCourse = new User_Course(); // nieuwe gebruikercursus
 
-        $userCourse->course_id = $request->input('course_id'); 
+        $userCourse->course_id = $request->input('course_id');
         $userCourse->user_id = $request->input('user_id'); 
-        $userCourse->price = $request->input('price'); 
+        $userCourse->start_date = $request->input('start_date');
+        $userCourse->end_date = $request->input('end_date');
 
-        $userCourse->save(); 
+
+        $userCourse->save();  // hier save ik alle velden die zijn ingevoerd bij bij de view
         return redirect('course');
     }
 
@@ -59,13 +61,43 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        $course = new Course();
+        $course = new Course(); // nieuwe cursus
 
         $course->title = $request->input('title');
         $course->description = $request->input('description');
-        $course->save();
+        $course->price = $request->input('price');
+        $course->save(); // hier save ik alle velden die zijn ingevoerd bij de view
 
         return redirect('course'); 
+    }
+
+    public function edit($id)
+    {
+        $course = Course::find($id); // hier zoek ik naar 1 cursus
+
+        return view('course.edit', compact('course'));
+    }
+
+    public function editUserCourse($id)
+    {
+        $userCourse = User_Course::find($id); // hier zoek ik naar 1 gebruiker cursus
+
+        $users = User::all(); 
+
+        return view('course.editUserCourse', compact('userCourse', 'users'));
+    }
+
+    
+    public function updateUserCourse(Request $request, $id)
+    {
+        User_Course::find($id)->fill($request->input())->save(); //hier update hij alle velden 
+        return redirect('course'); 
+    }
+
+    public function update(Request $request, $id)
+    {
+        Course::find($id)->fill($request->input())->save(); // update alle velden
+        return redirect('course');
     }
 
     /**
@@ -76,7 +108,7 @@ class CoursesController extends Controller
      */
     public function show($id)
     {
-        $courses = User_Course::where('users_courses.course_id', '=', $id)->get();
+        $courses = User_Course::where('users_courses.course_id', '=', $id)->sortable()->get(); // hier laat ik de id zien
 
         return view('course.show', compact('courses'));
     }
@@ -89,7 +121,7 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        Course::find($id)->delete();
+        Course::find($id)->delete(); // hier zoek ik naar de id en delete ik de cursus
         return redirect()->back();
     }
 
@@ -97,7 +129,7 @@ class CoursesController extends Controller
     {
         $course = User_Course::find($id);
 
-        $course->delete();
+        $course->delete(); // hier zoek ik naar de id delete ik de gebruiker cursus
 
         return redirect()->back();
     }

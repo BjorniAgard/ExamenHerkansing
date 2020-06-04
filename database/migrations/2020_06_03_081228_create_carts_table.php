@@ -17,6 +17,7 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->string("brand");
             $table->string("type");
+            $table->string("status");
             $table->unsignedBigInteger('course_id');
             $table->timestamps();
             

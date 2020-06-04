@@ -17,7 +17,8 @@ class CreateUsersCoursesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
-            $table->integer("price");
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
 

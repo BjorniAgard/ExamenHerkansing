@@ -11,15 +11,17 @@
                 <th scope="col">Merk</th>
                 <th scope="col">Type</th>
                 <th scope="col">Cursus</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
         @foreach ($carts as $cart)
         <tbody>
             <tr>
-                <td>{{ $cart->id }}</>
+                <td>{{ $cart->id }}</td>
                 <td>{{ $cart->brand }}</td>
                 <td>{{ $cart->type}}</td>
                 <td>{{ $cart->course_id}}</td>
+                <td>{{ $cart->status}}</td> 
             </tr>
         </tbody>
         @endforeach

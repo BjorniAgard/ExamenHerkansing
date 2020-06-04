@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->string("title");
             $table->string("description");
+            $table->integer("price");
             $table->timestamps();
         });
     }

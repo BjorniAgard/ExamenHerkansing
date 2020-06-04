@@ -14,8 +14,13 @@
             </div>
             <hr class="divisor">
             <div class="form-group">
-                <label for="Cursus">Beschrijving</label>
+                <label for="beschrijving">Beschrijving</label>
                 <input type="text" name="description" class="form-control" required>
+            </div>
+            <hr class="divisor">
+            <div class="form-group">
+                <label for="prijs">Prijs</label>
+                <input type="number" name="price" class="form-control" required>
             </div>
             <button type="submit" class="mt-3 btn btn-primary topBtn">Aanmaken</button>
         </form>

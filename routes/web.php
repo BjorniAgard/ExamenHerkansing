@@ -22,6 +22,8 @@ Route::resource('cart', 'CartsController');
 Route::get('/course/{course}/createUserCourse', 'CoursesController@createUserCourse')->name('createUserCourse.create');
 Route::post('course/store', 'CoursesController@storeUserCourse')->name('storeUserCourse.store');
 Route::delete('course/{course}/course', 'CoursesController@destroyUserCourse')->name('destroyUserCourse.destroy');
+Route::get('course{course}/edit', 'CoursesController@editUserCourse')->name('editUserCourse.edit');
+Route::patch('course/{course}/update', 'CoursesController@updateUserCourse')->name('updateUserCourse.update');
 
 Auth::routes();
 
